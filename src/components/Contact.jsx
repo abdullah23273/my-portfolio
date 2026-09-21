@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -8,13 +9,14 @@ import {
 } from "lucide-react";
 
 function Contact() {
+  const [status, setStatus] = useState("");
+
   const contactLinks = [
     {
       icon: Mail,
       label: "Email",
       value: "abdullahwork72@gmail.com",
       href: "https://mail.google.com/mail/?view=cm&fs=1&to=abdullahwork72@gmail.com&su=Project%20Inquiry",
-      target: "_blank",
     },
     {
       icon: Phone,
@@ -35,6 +37,40 @@ function Contact() {
       href: "https://github.com/abdullah23273",
     },
   ];
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setStatus("Sending...");
+
+    const formData = new FormData(event.target);
+
+    formData.append(
+      "access_key",
+      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+    );
+
+    try {
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus("Message sent successfully! ✅");
+        event.target.reset();
+      } else {
+        setStatus("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("Unable to send message. Please try again.");
+    }
+  };
 
   return (
     <section
@@ -75,34 +111,13 @@ function Contact() {
 
           {/* Contact Form */}
           <motion.form
-            action="https://formsubmit.co/abdullahwork72@gmail.com"
-            method="POST"
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-12 max-w-3xl"
           >
-
-            {/* Form Settings */}
-            <input
-              type="hidden"
-              name="_subject"
-              value="New Portfolio Contact Message"
-            />
-
-            <input
-              type="hidden"
-              name="_captcha"
-              value="false"
-            />
-
-            <input
-              type="hidden"
-              name="_template"
-              value="table"
-            />
-
             {/* Name + Email */}
             <div className="grid gap-5 sm:grid-cols-2">
 
@@ -148,7 +163,6 @@ function Contact() {
 
             {/* Subject */}
             <div className="mt-5">
-
               <label
                 htmlFor="subject"
                 className="mb-2 block text-sm font-medium text-gray-300"
@@ -164,12 +178,10 @@ function Contact() {
                 placeholder="Project Inquiry"
                 className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
               />
-
             </div>
 
             {/* Message */}
             <div className="mt-5">
-
               <label
                 htmlFor="message"
                 className="mb-2 block text-sm font-medium text-gray-300"
@@ -185,12 +197,10 @@ function Contact() {
                 placeholder="Tell me about your project or opportunity..."
                 className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
               />
-
             </div>
 
             {/* Send Button */}
             <div className="mt-6 flex justify-center">
-
               <button
                 type="submit"
                 className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 font-medium text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500"
@@ -202,9 +212,14 @@ function Contact() {
                   className="transition-transform group-hover:translate-x-1"
                 />
               </button>
-
             </div>
 
+            {/* Status */}
+            {status && (
+              <p className="mt-4 text-center text-sm text-gray-400">
+                {status}
+              </p>
+            )}
           </motion.form>
 
           {/* Location */}
@@ -212,7 +227,6 @@ function Contact() {
             <MapPin size={16} />
             Karachi, Pakistan
           </div>
-
         </motion.div>
 
         {/* Contact Links */}
@@ -248,7 +262,6 @@ function Contact() {
                 }}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.05]"
               >
-
                 <div className="flex items-center gap-4">
 
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10">
@@ -259,7 +272,6 @@ function Contact() {
                   </div>
 
                   <div className="min-w-0 text-left">
-
                     <p className="text-xs text-gray-500">
                       {item.label}
                     </p>
@@ -267,17 +279,14 @@ function Contact() {
                     <p className="mt-1 truncate text-sm font-medium text-gray-300 group-hover:text-white">
                       {item.value}
                     </p>
-
                   </div>
 
                 </div>
-
               </motion.a>
             );
           })}
 
         </div>
-
       </div>
     </section>
   );
