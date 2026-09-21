@@ -4,12 +4,36 @@ import {
   Database,
   Globe,
   LockKeyhole,
+  Scissors,
 } from "lucide-react";
 
 function Projects() {
   const projects = [
     {
       number: "01",
+      title: "Urban Blade Barber Studio",
+      category: "Client-Style Business Website",
+      description:
+        "A premium, responsive barber shop website designed as a real-world client project with modern UI, service presentation, gallery, testimonials, booking CTAs, and contact information.",
+      technologies: [
+        "React.js",
+        "Vite",
+        "JavaScript",
+        "Tailwind CSS",
+        "Lucide React",
+      ],
+      features: [
+        "Responsive premium barber website",
+        "Services and pricing showcase",
+        "Gallery and customer testimonials",
+        "Booking and contact CTAs",
+      ],
+      icon: Scissors,
+      type: "Client Project",
+      link: "https://urban-blade-website.vercel.app/",
+    },
+    {
+      number: "02",
       title: "Customer Complaint Management System",
       category: "Full-Stack Web Application",
       description:
@@ -26,9 +50,11 @@ function Projects() {
         "Reduced manual complaint processing",
       ],
       icon: Globe,
+      type: "Academic / Professional Project",
+      link: "https://github.com/abdullah23273",
     },
     {
-      number: "02",
+      number: "03",
       title: "Intern Attendance Management System",
       category: "Web Application",
       description:
@@ -45,6 +71,8 @@ function Projects() {
         "Improved record accuracy",
       ],
       icon: Database,
+      type: "Academic / Professional Project",
+      link: "https://github.com/abdullah23273",
     },
   ];
 
@@ -74,14 +102,14 @@ function Projects() {
             </h2>
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-400">
-              Practical software projects developed using backend,
-              web development, and database technologies.
+              Practical software projects and real-world web experiences
+              developed using modern web, backend, and database technologies.
             </p>
           </div>
 
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span className="h-2 w-2 rounded-full bg-blue-500" />
-            2 Featured Projects
+            3 Featured Projects
           </div>
         </motion.div>
 
@@ -102,11 +130,24 @@ function Projects() {
                   delay: index * 0.15,
                 }}
                 whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:border-blue-500/30 sm:p-9"
+                className={`group relative overflow-hidden rounded-3xl border bg-white/[0.03] p-7 transition duration-300 sm:p-9 ${
+                  project.number === "01"
+                    ? "border-blue-500/30 hover:border-blue-500/50"
+                    : "border-white/10 hover:border-blue-500/30"
+                }`}
               >
 
-                {/* Background Glow */}
-                <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-blue-600/10 blur-3xl transition duration-500 group-hover:bg-blue-600/20" />
+                {/* Featured Glow */}
+                <div
+                  className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full blur-3xl transition duration-500 ${
+                    project.number === "01"
+                      ? "bg-blue-600/15 group-hover:bg-blue-600/25"
+                      : "bg-blue-600/10 group-hover:bg-blue-600/20"
+                  }`}
+                />
+
+                {/* Featured Badge */}
+                {project.number === "01" }
 
                 {/* Top Row */}
                 <div className="relative flex items-start justify-between">
@@ -118,7 +159,13 @@ function Projects() {
                     />
                   </div>
 
-                  <span className="text-5xl font-bold text-white/5">
+                  <span
+                    className={`text-5xl font-bold ${
+                      project.number === "01"
+                        ? "text-blue-500/10"
+                        : "text-white/5"
+                    }`}
+                  >
                     {project.number}
                   </span>
 
@@ -177,11 +224,13 @@ function Projects() {
 
                   <div className="flex items-center gap-2 text-sm text-gray-500">
                     <LockKeyhole size={15} />
-                    Academic / Professional Project
+                    {project.type}
                   </div>
 
                   <a
-                    href="https://github.com/abdullah23273"
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm font-medium text-white transition group-hover:text-blue-400"
                   >
                     View Details
