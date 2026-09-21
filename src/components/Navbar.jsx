@@ -72,12 +72,21 @@ function Navbar({ darkMode, setDarkMode }) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="flex items-center gap-2 md:hidden">
-
-
-          
-
-        </div>
+        {/* Mobile Actions */}
+<div className="flex items-center gap-2 md:hidden">
+  <button
+    type="button"
+    onClick={() => setIsOpen(!isOpen)}
+    aria-label={isOpen ? "Close menu" : "Open menu"}
+    className={`flex h-10 w-10 items-center justify-center rounded-xl border transition ${
+      darkMode
+        ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
+        : "border-slate-200 bg-white text-slate-900 hover:bg-slate-100"
+    }`}
+  >
+    {isOpen ? <X size={22} /> : <Menu size={22} />}
+  </button>
+</div>
       </nav>
 
       {/* Mobile Menu */}
