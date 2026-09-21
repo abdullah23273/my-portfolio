@@ -4,17 +4,18 @@ import {
   Phone,
   ArrowUpRight,
   MapPin,
+  Send,
 } from "lucide-react";
 
 function Contact() {
   const contactLinks = [
     {
-  icon: Mail,
-  label: "Email",
-  value: "abdullahwork72@gmail.com",
-  href: "https://mail.google.com/mail/?view=cm&fs=1&to=abdullahwork72@gmail.com&su=Project%20Inquiry",
-  target: "_blank",
-},
+      icon: Mail,
+      label: "Email",
+      value: "abdullahwork72@gmail.com",
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=abdullahwork72@gmail.com&su=Project%20Inquiry",
+      target: "_blank",
+    },
     {
       icon: Phone,
       label: "Phone",
@@ -28,11 +29,11 @@ function Contact() {
       href: "https://www.linkedin.com/in/muhammad-abdullah-rashid-a72647374",
     },
     {
-  icon: ArrowUpRight,
-  label: "GitHub",
-  value: "abdullah23273",
-  href: "https://github.com/abdullah23273",
-},
+      icon: ArrowUpRight,
+      label: "GitHub",
+      value: "abdullah23273",
+      href: "https://github.com/abdullah23273",
+    },
   ];
 
   return (
@@ -51,40 +52,163 @@ function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-14 text-center sm:px-12 sm:py-20"
+          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-14 sm:px-12 sm:py-20"
         >
+          {/* Heading */}
+          <div className="text-center">
 
-          <p className="text-sm font-medium uppercase tracking-[0.25em] text-blue-500">
-            Get In Touch
-          </p>
+            <p className="text-sm font-medium uppercase tracking-[0.25em] text-blue-500">
+              Get In Touch
+            </p>
 
-          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Let's build something
-            <span className="text-blue-500"> meaningful.</span>
-          </h2>
+            <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Let's build something
+              <span className="text-blue-500"> meaningful.</span>
+            </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400">
-            I'm open to discussing software development opportunities,
-            projects, internships, and other professional collaborations.
-          </p>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400">
+              I'm open to discussing software development opportunities,
+              projects, internships, and other professional collaborations.
+            </p>
 
-          {/* Email CTA */}
-          <a
-  href="https://mail.google.com/mail/?view=cm&fs=1&to=abdullahwork72@gmail.com&su=Project%20Inquiry"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group mt-8 inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 font-medium text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500"
->
-  Send Me an Email
+          </div>
 
-  <ArrowUpRight
-    size={18}
-    className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-  />
-</a>
+          {/* Contact Form */}
+          <motion.form
+            action="https://formsubmit.co/abdullahwork72@gmail.com"
+            method="POST"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto mt-12 max-w-3xl"
+          >
+
+            {/* Form Settings */}
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Portfolio Contact Message"
+            />
+
+            <input
+              type="hidden"
+              name="_captcha"
+              value="false"
+            />
+
+            <input
+              type="hidden"
+              name="_template"
+              value="table"
+            />
+
+            {/* Name + Email */}
+            <div className="grid gap-5 sm:grid-cols-2">
+
+              {/* Name */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Your Name
+                </label>
+
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="John Doe"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Email Address
+                </label>
+
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="john@example.com"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
+                />
+              </div>
+
+            </div>
+
+            {/* Subject */}
+            <div className="mt-5">
+
+              <label
+                htmlFor="subject"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Subject
+              </label>
+
+              <input
+                id="subject"
+                type="text"
+                name="subject"
+                required
+                placeholder="Project Inquiry"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
+              />
+
+            </div>
+
+            {/* Message */}
+            <div className="mt-5">
+
+              <label
+                htmlFor="message"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="6"
+                placeholder="Tell me about your project or opportunity..."
+                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
+              />
+
+            </div>
+
+            {/* Send Button */}
+            <div className="mt-6 flex justify-center">
+
+              <button
+                type="submit"
+                className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 font-medium text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500"
+              >
+                Send Message
+
+                <Send
+                  size={17}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </button>
+
+            </div>
+
+          </motion.form>
 
           {/* Location */}
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
+          <div className="mt-8 flex items-center justify-center gap-2 text-sm text-gray-500">
             <MapPin size={16} />
             Karachi, Pakistan
           </div>
@@ -102,12 +226,16 @@ function Contact() {
                 key={item.label}
                 href={item.href}
                 target={
-                  item.label === "LinkedIn" || item.label === "GitHub"
+                  item.label === "Email" ||
+                  item.label === "LinkedIn" ||
+                  item.label === "GitHub"
                     ? "_blank"
                     : undefined
                 }
                 rel={
-                  item.label === "LinkedIn" || item.label === "GitHub"
+                  item.label === "Email" ||
+                  item.label === "LinkedIn" ||
+                  item.label === "GitHub"
                     ? "noopener noreferrer"
                     : undefined
                 }
@@ -120,6 +248,7 @@ function Contact() {
                 }}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.05]"
               >
+
                 <div className="flex items-center gap-4">
 
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10">
@@ -130,6 +259,7 @@ function Contact() {
                   </div>
 
                   <div className="min-w-0 text-left">
+
                     <p className="text-xs text-gray-500">
                       {item.label}
                     </p>
@@ -137,9 +267,11 @@ function Contact() {
                     <p className="mt-1 truncate text-sm font-medium text-gray-300 group-hover:text-white">
                       {item.value}
                     </p>
+
                   </div>
 
                 </div>
+
               </motion.a>
             );
           })}
