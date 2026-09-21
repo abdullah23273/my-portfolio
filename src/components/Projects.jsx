@@ -5,6 +5,7 @@ import {
   Globe,
   LockKeyhole,
   Scissors,
+  Sparkles,
 } from "lucide-react";
 
 function Projects() {
@@ -34,6 +35,29 @@ function Projects() {
     },
     {
       number: "02",
+      title: "LUMÉ AESTHETICS",
+      category: "Premium Medical Aesthetics Website",
+      description:
+    "A luxury, conversion-focused aesthetics clinic website designed to showcase treatments, specialists, results, testimonials, and consultation booking through a refined editorial-style experience.",
+      technologies: [
+        "React.js",
+    "Vite",
+    "JavaScript",
+    "Tailwind CSS",
+    "Lucide React",
+      ],
+      features: [
+        "Luxury editorial-style UI",
+    "Treatment and specialist showcase",
+    "Before & after results section",
+    "Consultation-focused CTAs",
+      ],
+      icon: Sparkles,
+      type: "Client Project",
+      link: "https://lumeaesthetics-one.vercel.app/",
+    },
+    {
+      number: "03",
       title: "Customer Complaint Management System",
       category: "Full-Stack Web Application",
       description:
@@ -54,7 +78,7 @@ function Projects() {
       link: "https://github.com/abdullah23273",
     },
     {
-      number: "03",
+      number: "04",
       title: "Intern Attendance Management System",
       category: "Web Application",
       description:
@@ -109,7 +133,7 @@ function Projects() {
 
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span className="h-2 w-2 rounded-full bg-blue-500" />
-            3 Featured Projects
+            4 Featured Projects
           </div>
         </motion.div>
 
