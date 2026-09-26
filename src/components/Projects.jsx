@@ -3,9 +3,9 @@ import {
   ArrowUpRight,
   Database,
   Globe,
-  LockKeyhole,
   Scissors,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 function Projects() {
@@ -13,7 +13,7 @@ function Projects() {
     {
       number: "01",
       title: "Urban Blade Barber Studio",
-      category: "Client-Style Business Website",
+      category: "Client Business Website",
       description:
         "A premium, responsive barber shop website designed as a real-world client project with modern UI, service presentation, gallery, testimonials, booking CTAs, and contact information.",
       technologies: [
@@ -32,29 +32,31 @@ function Projects() {
       icon: Scissors,
       type: "Client Project",
       link: "https://urban-blade-website.vercel.app/",
+      featured: true,
     },
     {
       number: "02",
       title: "LUMÉ AESTHETICS",
       category: "Premium Medical Aesthetics Website",
       description:
-    "A luxury, conversion-focused aesthetics clinic website designed to showcase treatments, specialists, results, testimonials, and consultation booking through a refined editorial-style experience.",
+        "A luxury, conversion-focused aesthetics clinic website designed to showcase treatments, specialists, results, testimonials, and consultation booking through a refined editorial-style experience.",
       technologies: [
         "React.js",
-    "Vite",
-    "JavaScript",
-    "Tailwind CSS",
-    "Lucide React",
+        "Vite",
+        "JavaScript",
+        "Tailwind CSS",
+        "Lucide React",
       ],
       features: [
         "Luxury editorial-style UI",
-    "Treatment and specialist showcase",
-    "Before & after results section",
-    "Consultation-focused CTAs",
+        "Treatment and specialist showcase",
+        "Before & after results section",
+        "Consultation-focused CTAs",
       ],
       icon: Sparkles,
       type: "Client Project",
       link: "https://lumeaesthetics-one.vercel.app/",
+      featured: true,
     },
     {
       number: "03",
@@ -62,11 +64,7 @@ function Projects() {
       category: "Full-Stack Web Application",
       description:
         "A database-driven complaint management system designed to register, track, route, and manage customer complaints efficiently.",
-      technologies: [
-        "ASP.NET Web Forms",
-        "C#",
-        "SQL Server",
-      ],
+      technologies: ["ASP.NET Web Forms", "C#", "SQL Server"],
       features: [
         "Complaint registration and tracking",
         "Department-based complaint routing",
@@ -76,6 +74,7 @@ function Projects() {
       icon: Globe,
       type: "Academic / Professional Project",
       link: "https://github.com/abdullah23273",
+      featured: false,
     },
     {
       number: "04",
@@ -83,11 +82,7 @@ function Projects() {
       category: "Web Application",
       description:
         "A secure attendance management system developed to digitally track intern attendance and simplify administrative reporting.",
-      technologies: [
-        "ASP.NET",
-        "C#",
-        "SQL Server",
-      ],
+      technologies: ["ASP.NET", "C#", "SQL Server"],
       features: [
         "Login-based access",
         "Digital attendance tracking",
@@ -97,181 +92,228 @@ function Projects() {
       icon: Database,
       type: "Academic / Professional Project",
       link: "https://github.com/abdullah23273",
+      featured: false,
     },
   ];
+
+  const featured = projects.filter((p) => p.featured);
+  const other = projects.filter((p) => !p.featured);
 
   return (
     <section
       id="projects"
-      className="relative px-6 py-24 sm:py-32"
+      className="relative border-t border-white/[0.04] px-6 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl">
-
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
         >
           <div>
-            <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-blue-500">
-              Selected Work
-            </p>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-blue-500">04</span>
+              <span className="h-px w-8 bg-blue-500/40" />
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
+                Selected Work
+              </p>
+            </div>
 
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Projects I've
-              <span className="text-blue-500"> built.</span>
+            <h2 className="mt-6 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              Projects I've{" "}
+              <span className="text-neutral-500">built.</span>
             </h2>
-
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-400">
-              Practical software projects and real-world web experiences
-              developed using modern web, backend, and database technologies.
-            </p>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <span className="h-2 w-2 rounded-full bg-blue-500" />
-            4 Featured Projects
+          <div className="flex items-center gap-2 font-mono text-xs text-neutral-600">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+            {projects.length} Featured Projects
           </div>
         </motion.div>
 
-        {/* Project Cards */}
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
-
-          {projects.map((project, index) => {
+        {/* Featured projects — large editorial layout */}
+        <div className="mt-16 space-y-20">
+          {featured.map((project, index) => {
             const Icon = project.icon;
-
+            const reversed = index % 2 === 1;
             return (
               <motion.article
                 key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.15,
-                }}
-                whileHover={{ y: -6 }}
-                className={`group relative overflow-hidden rounded-3xl border bg-white/[0.03] p-7 transition duration-300 sm:p-9 ${
-                  project.number === "01"
-                    ? "border-blue-500/30 hover:border-blue-500/50"
-                    : "border-white/10 hover:border-blue-500/30"
-                }`}
+                transition={{ duration: 0.7 }}
+                className="group"
               >
-
-                {/* Featured Glow */}
                 <div
-                  className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full blur-3xl transition duration-500 ${
-                    project.number === "01"
-                      ? "bg-blue-600/15 group-hover:bg-blue-600/25"
-                      : "bg-blue-600/10 group-hover:bg-blue-600/20"
+                  className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
+                    reversed ? "lg:[&>*:first-child]:order-2" : ""
                   }`}
-                />
-
-                {/* Featured Badge */}
-                {project.number === "01" }
-
-                {/* Top Row */}
-                <div className="relative flex items-start justify-between">
-
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10">
-                    <Icon
-                      size={25}
-                      className="text-blue-500"
-                    />
-                  </div>
-
-                  <span
-                    className={`text-5xl font-bold ${
-                      project.number === "01"
-                        ? "text-blue-500/10"
-                        : "text-white/5"
-                    }`}
-                  >
-                    {project.number}
-                  </span>
-
-                </div>
-
-                {/* Category */}
-                <p className="relative mt-8 text-sm font-medium text-blue-400">
-                  {project.category}
-                </p>
-
-                {/* Title */}
-                <h3 className="relative mt-2 text-2xl font-bold text-white sm:text-3xl">
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p className="relative mt-4 leading-7 text-gray-400">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="relative mt-6 flex flex-wrap gap-2">
-                  {project.technologies.map((technology) => (
-                    <span
-                      key={technology}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-gray-300"
-                    >
-                      {technology}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Features */}
-                <div className="relative mt-7 border-t border-white/10 pt-6">
-
-                  <p className="mb-4 text-sm font-medium text-gray-300">
-                    Key Features
-                  </p>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {project.features.map((feature) => (
-                      <div
-                        key={feature}
-                        className="flex gap-2 text-sm text-gray-500"
-                      >
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-
-                {/* Bottom */}
-                <div className="relative mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <LockKeyhole size={15} />
-                    {project.type}
-                  </div>
-
+                >
+                  {/* Visual preview */}
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm font-medium text-white transition group-hover:text-blue-400"
+                    className="relative block aspect-[4/3] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#111114]"
                   >
-                    View Details
-                    <ArrowUpRight
-                      size={17}
-                      className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                    />
+                    {/* Grid background */}
+                    <div className="grid-bg absolute inset-0 opacity-30" />
+
+                    {/* Large number */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-display text-[8rem] font-bold text-white/[0.04] transition-all duration-500 group-hover:text-white/[0.06] sm:text-[10rem]">
+                        {project.number}
+                      </span>
+                    </div>
+
+                    {/* Icon badge */}
+                    <div className="absolute left-6 top-6 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/[0.06]">
+                      <Icon size={22} className="text-blue-500" />
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-blue-600/0 transition-all duration-300 group-hover:bg-blue-600/[0.04]">
+                      <span className="flex translate-y-4 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                        <ExternalLink size={15} />
+                        View Live Site
+                      </span>
+                    </div>
                   </a>
 
-                </div>
+                  {/* Project info */}
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-wider text-blue-400">
+                      {project.category}
+                    </p>
 
+                    <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
+                      {project.title}
+                    </h3>
+
+                    <p className="mt-4 text-sm leading-relaxed text-neutral-400">
+                      {project.description}
+                    </p>
+
+                    {/* Technologies */}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 font-mono text-xs text-neutral-400"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Features */}
+                    <div className="mt-6 grid gap-2 sm:grid-cols-2">
+                      {project.features.map((feature) => (
+                        <div
+                          key={feature}
+                          className="flex gap-2 text-xs text-neutral-500"
+                        >
+                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500/60" />
+                          {feature}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTA */}
+                    <div className="mt-7 flex items-center gap-4">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/btn flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+                      >
+                        Live Website
+                        <ArrowUpRight
+                          size={15}
+                          className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        />
+                      </a>
+                      <span className="font-mono text-xs text-neutral-600">
+                        {project.type}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </motion.article>
             );
           })}
-
         </div>
 
+        {/* Other projects — compact list */}
+        <div className="mt-20 grid gap-4 md:grid-cols-2">
+          {other.map((project, index) => {
+            const Icon = project.icon;
+            return (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/[0.12] hover:bg-white/[0.03] sm:p-8"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-500/[0.06]">
+                    <Icon size={20} className="text-blue-500" />
+                  </div>
+                  <span className="font-display text-2xl font-bold text-white/[0.06]">
+                    {project.number}
+                  </span>
+                </div>
+
+                <p className="mt-6 font-mono text-xs uppercase tracking-wider text-blue-400">
+                  {project.category}
+                </p>
+
+                <h3 className="mt-2 font-display text-lg font-bold text-white">
+                  {project.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-relaxed text-neutral-500">
+                  {project.description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 font-mono text-xs text-neutral-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
+                  <span className="font-mono text-xs text-neutral-600">
+                    {project.type}
+                  </span>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm font-medium text-neutral-300 transition-colors group-hover:text-blue-400"
+                  >
+                    View Details
+                    <ArrowUpRight
+                      size={15}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

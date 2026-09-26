@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BriefcaseBusiness, CalendarDays } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 
 function Experience() {
   const experiences = [
@@ -14,6 +14,7 @@ function Experience() {
         "Simplified technical concepts for students",
         "Improved student engagement through practical learning",
       ],
+      tags: ["Teaching", "IT Training", "Computer Literacy"],
     },
     {
       role: "IT Intern",
@@ -27,6 +28,7 @@ function Experience() {
         "Worked on frontend, backend and database integration",
         "Supported IT troubleshooting and maintenance activities",
       ],
+      tags: ["ASP.NET", "C#", "SQL Server", "Full-Stack"],
     },
     {
       role: "Customer Support Agent",
@@ -39,116 +41,103 @@ function Experience() {
         "Developed communication and problem-solving skills",
         "Worked with performance and service targets",
       ],
+      tags: ["Customer Support", "Communication", "Problem Solving"],
     },
   ];
 
   return (
     <section
       id="experience"
-      className="relative px-6 py-24 sm:py-32"
+      className="relative border-t border-white/[0.04] px-6 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-5xl">
-
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-blue-500">
-            Experience
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-xs text-blue-500">03</span>
+            <span className="h-px w-8 bg-blue-500/40" />
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
+              Experience
+            </p>
+          </div>
 
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            My professional
-            <span className="text-blue-500"> journey.</span>
+          <h2 className="mt-6 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            My professional{" "}
+            <span className="text-neutral-500">journey.</span>
           </h2>
-
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-400">
-            A combination of software development, IT support,
-            teaching, and customer-facing experience.
-          </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative mt-16">
-
-          {/* Vertical Line */}
-          <div className="absolute left-[19px] top-0 hidden h-full w-px bg-gradient-to-b from-blue-500/50 via-white/10 to-transparent sm:block" />
+          {/* Vertical line */}
+          <div className="absolute left-[7px] top-2 h-[calc(100%-1rem)] w-px bg-gradient-to-b from-blue-500/40 via-white/[0.08] to-transparent" />
 
           <div className="space-y-12">
-
-            {experiences.map((experience, index) => (
+            {experiences.map((exp, index) => (
               <motion.div
-                key={experience.role}
-                initial={{ opacity: 0, x: -25 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={exp.role}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.12,
-                }}
-                className="relative sm:pl-14"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative pl-10"
               >
+                {/* Dot */}
+                <div className="absolute left-0 top-1.5 h-4 w-4 rounded-full border-2 border-blue-500 bg-[#0a0a0b]" />
 
-                {/* Timeline Dot */}
-                <div className="absolute left-0 top-1 hidden h-10 w-10 items-center justify-center rounded-full border border-blue-500/30 bg-[#070b14] sm:flex">
-                  <BriefcaseBusiness
-                    size={17}
-                    className="text-blue-500"
-                  />
-                </div>
-
-                {/* Card */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition duration-300 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.05] sm:p-8">
-
-                  {/* Header */}
-                  <div className="flex flex-col justify-between gap-3 md:flex-row md:items-start">
-
-                    <div>
-                      <h3 className="text-xl font-semibold text-white sm:text-2xl">
-                        {experience.role}
-                      </h3>
-
-                      <p className="mt-1 font-medium text-blue-400">
-                        {experience.company}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <CalendarDays size={16} />
-                      {experience.date}
-                    </div>
-
+                {/* Content */}
+                <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-white">
+                      {exp.role}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-blue-400">
+                      {exp.company}
+                    </p>
                   </div>
-
-                  {/* Description */}
-                  <p className="mt-5 max-w-3xl leading-7 text-gray-400">
-                    {experience.description}
-                  </p>
-
-                  {/* Achievements */}
-                  <ul className="mt-5 space-y-3">
-                    {experience.achievements.map((achievement) => (
-                      <li
-                        key={achievement}
-                        className="flex gap-3 text-sm leading-6 text-gray-400"
-                      >
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
-
+                  <div className="flex items-center gap-2 text-xs text-neutral-600">
+                    <CalendarDays size={14} />
+                    {exp.date}
+                  </div>
                 </div>
 
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-400">
+                  {exp.description}
+                </p>
+
+                {/* Tags */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-xs text-neutral-500"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Achievements */}
+                <ul className="mt-4 space-y-2">
+                  {exp.achievements.map((achievement) => (
+                    <li
+                      key={achievement}
+                      className="flex gap-3 text-sm leading-relaxed text-neutral-500"
+                    >
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-500/60" />
+                      {achievement}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
-
           </div>
         </div>
-
       </div>
     </section>
   );

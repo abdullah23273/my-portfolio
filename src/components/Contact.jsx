@@ -62,12 +62,12 @@ function Contact() {
       const data = await response.json();
 
       if (data.success) {
-        setStatus("Message sent successfully! ✅");
+        setStatus("Message sent successfully.");
         event.target.reset();
       } else {
         setStatus("Something went wrong. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setStatus("Unable to send message. Please try again.");
     }
   };
@@ -75,166 +75,151 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden px-6 py-24 sm:py-32"
+      className="relative overflow-hidden border-t border-white/[0.04] px-6 py-24 sm:py-32"
     >
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
+      <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-20" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/[0.05] blur-[140px]" />
 
       <div className="mx-auto max-w-7xl">
-
-        {/* Main Contact Card */}
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-14 sm:px-12 sm:py-20"
+          transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          {/* Heading */}
-          <div className="text-center">
-
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-blue-500">
+          <div className="flex items-center justify-center gap-3">
+            <span className="font-mono text-xs text-blue-500">05</span>
+            <span className="h-px w-8 bg-blue-500/40" />
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
               Get In Touch
             </p>
-
-            <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Let's build something
-              <span className="text-blue-500"> meaningful.</span>
-            </h2>
-
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400">
-              I'm open to discussing software development opportunities,
-              projects, internships, and other professional collaborations.
-            </p>
-
           </div>
 
-          {/* Contact Form */}
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-12 max-w-3xl"
-          >
-            {/* Name + Email */}
-            <div className="grid gap-5 sm:grid-cols-2">
+          <h2 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Let's build something{" "}
+            <span className="text-neutral-500">meaningful.</span>
+          </h2>
 
-              {/* Name */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Your Name
-                </label>
-
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="John Doe"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Email Address
-                </label>
-
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="john@example.com"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
-                />
-              </div>
-
-            </div>
-
-            {/* Subject */}
-            <div className="mt-5">
-              <label
-                htmlFor="subject"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Subject
-              </label>
-
-              <input
-                id="subject"
-                type="text"
-                name="subject"
-                required
-                placeholder="Project Inquiry"
-                className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="mt-5">
-              <label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Message
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows="6"
-                placeholder="Tell me about your project or opportunity..."
-                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-blue-500 focus:bg-white/[0.06]"
-              />
-            </div>
-
-            {/* Send Button */}
-            <div className="mt-6 flex justify-center">
-              <button
-                type="submit"
-                className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 font-medium text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500"
-              >
-                Send Message
-
-                <Send
-                  size={17}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </button>
-            </div>
-
-            {/* Status */}
-            {status && (
-              <p className="mt-4 text-center text-sm text-gray-400">
-                {status}
-              </p>
-            )}
-          </motion.form>
-
-          {/* Location */}
-          <div className="mt-8 flex items-center justify-center gap-2 text-sm text-gray-500">
-            <MapPin size={16} />
-            Karachi, Pakistan
-          </div>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-400">
+            I'm open to discussing software development opportunities,
+            projects, internships, and other professional collaborations.
+          </p>
         </motion.div>
 
-        {/* Contact Links */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mx-auto mt-12 max-w-2xl"
+        >
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="name"
+                className="mb-2 block text-xs font-medium uppercase tracking-wider text-neutral-500"
+              >
+                Your Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                required
+                placeholder="John Doe"
+                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition placeholder:text-neutral-600 focus:border-blue-500/50 focus:bg-white/[0.04]"
+              />
+            </div>
 
+            <div>
+              <label
+                htmlFor="email"
+                className="mb-2 block text-xs font-medium uppercase tracking-wider text-neutral-500"
+              >
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                placeholder="john@example.com"
+                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition placeholder:text-neutral-600 focus:border-blue-500/50 focus:bg-white/[0.04]"
+              />
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <label
+              htmlFor="subject"
+              className="mb-2 block text-xs font-medium uppercase tracking-wider text-neutral-500"
+            >
+              Subject
+            </label>
+            <input
+              id="subject"
+              type="text"
+              name="subject"
+              required
+              placeholder="Project Inquiry"
+              className="w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition placeholder:text-neutral-600 focus:border-blue-500/50 focus:bg-white/[0.04]"
+            />
+          </div>
+
+          <div className="mt-5">
+            <label
+              htmlFor="message"
+              className="mb-2 block text-xs font-medium uppercase tracking-wider text-neutral-500"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              placeholder="Tell me about your project or opportunity..."
+              className="w-full resize-none rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition placeholder:text-neutral-600 focus:border-blue-500/50 focus:bg-white/[0.04]"
+            />
+          </div>
+
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs text-neutral-600">
+              <MapPin size={14} />
+              Karachi, Pakistan
+            </div>
+
+            <button
+              type="submit"
+              className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-600/20"
+            >
+              Send Message
+              <Send
+                size={15}
+                className="transition-transform group-hover:translate-x-0.5"
+              />
+            </button>
+          </div>
+
+          {status && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 text-center text-sm text-neutral-400"
+            >
+              {status}
+            </motion.p>
+          )}
+        </motion.form>
+
+        {/* Contact links */}
+        <div className="mt-16 grid gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] sm:grid-cols-2 lg:grid-cols-4">
           {contactLinks.map((item, index) => {
             const Icon = item.icon;
-
             return (
               <motion.a
                 key={item.label}
@@ -253,39 +238,25 @@ function Contact() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.08,
-                }}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.05]"
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="group bg-[#0a0a0b] p-5 transition-colors duration-300 hover:bg-white/[0.02]"
               >
-                <div className="flex items-center gap-4">
-
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10">
-                    <Icon
-                      size={20}
-                      className="text-blue-500"
-                    />
-                  </div>
-
-                  <div className="min-w-0 text-left">
-                    <p className="text-xs text-gray-500">
-                      {item.label}
-                    </p>
-
-                    <p className="mt-1 truncate text-sm font-medium text-gray-300 group-hover:text-white">
-                      {item.value}
-                    </p>
-                  </div>
-
-                </div>
+                <Icon
+                  size={18}
+                  className="text-blue-500 transition-transform duration-300 group-hover:scale-110"
+                />
+                <p className="mt-3 text-xs uppercase tracking-wider text-neutral-600">
+                  {item.label}
+                </p>
+                <p className="mt-1 truncate text-sm font-medium text-neutral-300 transition-colors group-hover:text-white">
+                  {item.value}
+                </p>
               </motion.a>
             );
           })}
-
         </div>
       </div>
     </section>
