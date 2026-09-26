@@ -3,47 +3,8 @@ import { CalendarDays } from "lucide-react";
 
 function Experience() {
   const experiences = [
-    {
-      role: "CIT Instructor",
-      company: "Alkhidmat Bano Qabil Program",
-      date: "Oct 2025 – Apr 2026",
-      description:
-        "Delivered structured computer literacy and IT training sessions while simplifying programming concepts through practical demonstrations.",
-      achievements: [
-        "Delivered hands-on computer and IT training",
-        "Simplified technical concepts for students",
-        "Improved student engagement through practical learning",
-      ],
-      tags: ["Teaching", "IT Training", "Computer Literacy"],
-    },
-    {
-      role: "IT Intern",
-      company: "Pakistan International Airlines (PIA)",
-      date: "Jul 2025 – Aug 2025",
-      description:
-        "Worked with the IT department on technical support and software development, including database-driven applications.",
-      achievements: [
-        "Developed a Customer Complaint Management System using ASP.NET and SQL Server",
-        "Built an Intern Attendance Management System",
-        "Worked on frontend, backend and database integration",
-        "Supported IT troubleshooting and maintenance activities",
-      ],
-      tags: ["ASP.NET", "C#", "SQL Server", "Full-Stack"],
-    },
-    {
-      role: "Customer Support Agent",
-      company: "Falcon Solutions",
-      date: "Jul 2023 – Nov 2023",
-      description:
-        "Handled customer queries and provided timely issue resolution in a fast-paced support environment.",
-      achievements: [
-        "Handled customer queries and technical issues",
-        "Developed communication and problem-solving skills",
-        "Worked with performance and service targets",
-      ],
-      tags: ["Customer Support", "Communication", "Problem Solving"],
-    },
-  ];
+   { role: "Junior MERN Stack Developer", company: "BytHawk | Karachi, Pakistan", date: "Sep 2026 – Present", description: "Developing and maintaining full-stack web applications using modern MERN stack technologies, with a focus on responsive interfaces, scalable backend services, and seamless data integration.", achievements: [ "Develop and maintain full-stack web applications using React.js, Node.js, Express.js, and MongoDB", "Build responsive user interfaces and scalable REST API endpoints", "Integrate frontend applications with backend services and database storage", "Implement features, debug technical issues, and use Git/GitHub for version control and collaboration", ], tags: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "Git"], }, { role: "CIT Instructor", company: "Alkhidmat Bano Qabil Program", date: "Oct 2025 – Apr 2026", description: "Delivered structured computer literacy and IT training sessions while simplifying programming concepts through practical demonstrations.", achievements: [ "Delivered hands-on computer and IT training", "Simplified technical concepts for students", "Improved student engagement through practical learning", ], tags: ["Teaching", "IT Training", "Computer Literacy"], }, { role: "IT Intern", company: "Pakistan International Airlines (PIA)", date: "Jul 2025 – Aug 2025", description: "Worked with the IT department on technical support and software development, including database-driven applications.", achievements: [ "Developed a Customer Complaint Management System using ASP.NET and SQL Server", "Built an Intern Attendance Management System", "Worked on frontend, backend and database integration", "Supported IT troubleshooting and maintenance activities", ], tags: ["ASP.NET", "C#", "SQL Server", "Full-Stack"], }, { role: "Customer Support Agent", company: "Falcon Solutions", date: "Jul 2023 – Nov 2023", description: "Handled customer queries and provided timely issue resolution in a fast-paced support environment.", achievements: [ "Handled customer queries and technical issues", "Developed communication and problem-solving skills", "Worked with performance and service targets", ], tags: ["Customer Support", "Communication", "Problem Solving"], }, ];
+  
 
   return (
     <section
