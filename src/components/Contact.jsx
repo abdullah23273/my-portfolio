@@ -3,10 +3,13 @@ import { motion } from "framer-motion";
 import {
   Mail,
   Phone,
-  ArrowUpRight,
-  MapPin,
+  MapPin,     
   Send,
 } from "lucide-react";
+import {
+  FaLinkedinIn,
+  FaGithub,
+} from "react-icons/fa";
 
 function Contact() {
   const [status, setStatus] = useState("");
@@ -25,13 +28,13 @@ function Contact() {
       href: "tel:+923212592621",
     },
     {
-      icon: ArrowUpRight,
+      icon: FaLinkedinIn,
       label: "LinkedIn",
       value: "Muhammad Abdullah Rashid",
       href: "https://www.linkedin.com/in/muhammad-abdullah-rashid-a72647374",
     },
     {
-      icon: ArrowUpRight,
+      icon: FaGithub,
       label: "GitHub",
       value: "abdullah23273",
       href: "https://github.com/abdullah23273",
