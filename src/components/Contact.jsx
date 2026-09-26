@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
   Phone,
-  MapPin,     
+  MapPin,
   Send,
 } from "lucide-react";
 import {
@@ -13,6 +14,7 @@ import {
 
 function Contact() {
   const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const contactLinks = [
     {
@@ -44,34 +46,65 @@ function Contact() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setStatus("Sending...");
+    setStatus("");
+    setIsSending(true);
 
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const formData = new FormData(form);
 
-    formData.append(
-      "access_key",
-      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
-    );
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+    // Check if Web3Forms access key exists
+    if (!accessKey) {
+      console.error("Web3Forms access key is missing.");
+      setStatus(
+        "Form configuration error. Please try again later."
+      );
+      setIsSending(false);
+      return;
+    }
+
+    const payload = {
+      access_key: accessKey,
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
 
     try {
       const response = await fetch(
         "https://api.web3forms.com/submit",
         {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
         }
       );
 
       const data = await response.json();
 
+      console.log("Web3Forms response:", data);
+
       if (data.success) {
         setStatus("Message sent successfully.");
-        event.target.reset();
+        form.reset();
       } else {
-        setStatus("Something went wrong. Please try again.");
+        setStatus(
+          data.message ||
+            "Something went wrong. Please try again."
+        );
       }
-    } catch {
-      setStatus("Unable to send message. Please try again.");
+    } catch (error) {
+      console.error("Web3Forms error:", error);
+      setStatus(
+        "Unable to send message. Please check your connection and try again."
+      );
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -81,9 +114,11 @@ function Contact() {
       className="relative overflow-hidden border-t border-white/[0.04] px-6 py-24 sm:py-32"
     >
       <div className="grid-bg pointer-events-none absolute inset-0 -z-10 opacity-20" />
+
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/[0.05] blur-[140px]" />
 
       <div className="mx-auto max-w-7xl">
+
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,8 +128,12 @@ function Contact() {
           className="text-center"
         >
           <div className="flex items-center justify-center gap-3">
-            <span className="font-mono text-xs text-blue-500">05</span>
+            <span className="font-mono text-xs text-blue-500">
+              05
+            </span>
+
             <span className="h-px w-8 bg-blue-500/40" />
+
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
               Get In Touch
             </p>
@@ -102,12 +141,15 @@ function Contact() {
 
           <h2 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Let's build something{" "}
-            <span className="text-neutral-500">meaningful.</span>
+            <span className="text-neutral-500">
+              meaningful.
+            </span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-400">
-            I'm open to discussing software development opportunities,
-            projects, internships, and other professional collaborations.
+            I'm open to discussing software development
+            opportunities, projects, internships, and other
+            professional collaborations.
           </p>
         </motion.div>
 
@@ -121,6 +163,8 @@ function Contact() {
           className="mx-auto mt-12 max-w-2xl"
         >
           <div className="grid gap-5 sm:grid-cols-2">
+
+            {/* Name */}
             <div>
               <label
                 htmlFor="name"
@@ -128,6 +172,7 @@ function Contact() {
               >
                 Your Name
               </label>
+
               <input
                 id="name"
                 type="text"
@@ -138,6 +183,7 @@ function Contact() {
               />
             </div>
 
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -145,6 +191,7 @@ function Contact() {
               >
                 Email Address
               </label>
+
               <input
                 id="email"
                 type="email"
@@ -156,6 +203,7 @@ function Contact() {
             </div>
           </div>
 
+          {/* Subject */}
           <div className="mt-5">
             <label
               htmlFor="subject"
@@ -163,6 +211,7 @@ function Contact() {
             >
               Subject
             </label>
+
             <input
               id="subject"
               type="text"
@@ -173,6 +222,7 @@ function Contact() {
             />
           </div>
 
+          {/* Message */}
           <div className="mt-5">
             <label
               htmlFor="message"
@@ -180,6 +230,7 @@ function Contact() {
             >
               Message
             </label>
+
             <textarea
               id="message"
               name="message"
@@ -190,7 +241,9 @@ function Contact() {
             />
           </div>
 
+          {/* Bottom */}
           <div className="mt-6 flex items-center justify-between gap-4">
+
             <div className="flex items-center gap-2 text-xs text-neutral-600">
               <MapPin size={14} />
               Karachi, Pakistan
@@ -198,31 +251,46 @@ function Contact() {
 
             <button
               type="submit"
-              className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-600/20"
+              disabled={isSending}
+              className={`group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-all duration-300 ${
+                isSending
+                  ? "cursor-not-allowed bg-blue-600/50"
+                  : "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-600/20"
+              }`}
             >
-              Send Message
-              <Send
-                size={15}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
+              {isSending ? "Sending..." : "Send Message"}
+
+              {!isSending && (
+                <Send
+                  size={15}
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
+              )}
             </button>
           </div>
 
+          {/* Status */}
           {status && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mt-4 text-center text-sm text-neutral-400"
+              className={`mt-4 text-center text-sm ${
+                status === "Message sent successfully."
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
             >
               {status}
             </motion.p>
           )}
         </motion.form>
 
-        {/* Contact links */}
+        {/* Contact Links */}
         <div className="mt-16 grid gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] sm:grid-cols-2 lg:grid-cols-4">
+
           {contactLinks.map((item, index) => {
             const Icon = item.icon;
+
             return (
               <motion.a
                 key={item.label}
@@ -244,16 +312,21 @@ function Contact() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.06,
+                }}
                 className="group bg-[#0a0a0b] p-5 transition-colors duration-300 hover:bg-white/[0.02]"
               >
                 <Icon
                   size={18}
                   className="text-blue-500 transition-transform duration-300 group-hover:scale-110"
                 />
+
                 <p className="mt-3 text-xs uppercase tracking-wider text-neutral-600">
                   {item.label}
                 </p>
+
                 <p className="mt-1 truncate text-sm font-medium text-neutral-300 transition-colors group-hover:text-white">
                   {item.value}
                 </p>
